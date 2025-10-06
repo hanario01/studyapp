@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
+    <header>
             <a href="index.php"><h1>まなびの森</h1></a>
             <nav>
                 <ul class="auth-links">
@@ -23,9 +22,10 @@
                     <li><a href="register.php">新規登録</a></li>
                 </ul>
             </nav>
-        </header>        
-        <p><ruby>学年<rt>がくねん</rt></ruby>を<ruby>選<rt>え</rt></ruby>らんでスタート！</p>
-        <main>
+    </header>
+    <main>      
+        <div class="container">
+            <p><ruby>学年<rt>がくねん</rt></ruby>を<ruby>選<rt>え</rt></ruby>らんでスタート！</p>     
             <div class="grades">
                 <a href="grade.php?grade=1" class="grade-btn">
                     <ruby>一年生<rt>いちねんせい</rt></ruby>
@@ -37,10 +37,8 @@
                     <ruby>三年生<rt>さんねんせい</rt></ruby>
                 </a>
             </div>
-        </main>
-        <footer></footer>
-        
-
-    </div>
+        </div>
+    </main>
+    <footer></footer>
 </body>
 </html>

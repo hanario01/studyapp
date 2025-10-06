@@ -9,28 +9,25 @@
 body {
     background-color: #f8fafc;
     /* 淡いグレー */
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
 
 .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
     text-align: center;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 1200px;
 }
+
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 2rem;
+    padding: 1rem;
 }
 
 header a {
@@ -46,7 +43,7 @@ header a {
 }
 
 /* ログインリンク */
-.auth-links li {
+li {
     list-style: none;
 }
 
@@ -105,4 +102,21 @@ p {
 .grade-btn rt {
     font-size: 0.8rem;
     color: #fffde7;
+}
+
+
+/* grade.php---------------------------
+-------------------------------------- */
+
+.grades-Subject {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.subject-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
 }
