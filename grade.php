@@ -22,7 +22,15 @@ $grade = $_GET['grade'] ?? 1;
                 </ul>
             </nav>
         </header>
-        <main></main>
+        <main>
+            <h2><?=$grade ?>年生の問題</h2>
+            <p>かもくをえらんでね</p>
+            <div class="grades">
+                
+            </div>
+            
+
+        </main>
         <footer></footer>
     </div>
 </body>
