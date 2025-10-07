@@ -42,6 +42,22 @@ header a {
     gap: 1rem;
 }
 
+main {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: flex-start;
+    /* 上寄せ */
+    justify-content: center;
+    padding-top: 2rem;
+    /* 少し上に配置 */
+}
+
+
+.container {
+    text-align: center;
+}
+
+
 /* ログインリンク */
 li {
     list-style: none;
@@ -62,9 +78,9 @@ h1 {
     text-align: center;
 }
 
-p {
+.p-title {
     margin-bottom: 30px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
 }
 
 /* 学年ボタン */
@@ -119,4 +135,17 @@ p {
     flex-direction: column;
     justify-content: center;
     justify-items: center;
+    margin-bottom: 1rem;
+}
+
+/* quiz.php--------------------------
+------------------------------------- */
+
+.container .quiz-title {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.margin-feedback {
+    margin-bottom: 3rem;
 }

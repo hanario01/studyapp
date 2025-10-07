@@ -25,7 +25,7 @@
     </header>
     <main>      
         <div class="container">
-            <p><ruby>学年<rt>がくねん</rt></ruby>を<ruby>選<rt>え</rt></ruby>らんでスタート！</p>     
+            <p class="p-title"><ruby>学年<rt>がくねん</rt></ruby>を<ruby>選<rt>え</rt></ruby>らんでスタート！</p>     
             <div class="grades">
                 <a href="grade.php?grade=1" class="grade-btn">
                     <ruby>一年生<rt>いちねんせい</rt></ruby>
