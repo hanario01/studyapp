@@ -1,0 +1,1 @@
+・ポートフォリオ作成における、小学生向け学習WEBアプリを作る。 ・作成期間は２週間ほど（現在３日目） ・プロジェクトフォルダ構成 studyapp-1/ ├── config/ ├── app/ │ └── views/ │ ├── quiz_view.php │ └── result_view.php ├── public/ │ ├── index.php │ ├── quiz.php │ └── result.php └── css/ └── style.css ・ここから拡張していく、

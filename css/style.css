@@ -1,151 +1,150 @@
-/* 共通設定 */
+/* ベースリセット */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    box-sizing: border-box;
+    font-family: "ヒラギノ角ゴシック", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
 }
 
 body {
-    background-color: #f8fafc;
-    /* 淡いグレー */
-    height: 100vh;
+    background-color: #fdf6e3;
+    /* 柔らかいクリーム色 */
+    color: #333;
+    line-height: 1.6;
 }
 
-
-.container {
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-    text-align: center;
+a {
+    text-decoration: none;
 }
-
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 2rem;
+    background-color: #f7c59f;
+    /* 柔らかいオレンジ */
     padding: 1rem;
+    text-align: center;
+    border-bottom: 2px solid #f0b070;
 }
 
-header a {
-    text-decoration: none;
+header h1 {
+    font-size: 2rem;
+    color: #fff;
 }
 
 .auth-links {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-items: center;
-    gap: 1rem;
+    list-style: none;
+    margin-top: 0.5rem;
+
 }
 
-main {
-    min-height: calc(100vh - 100px);
-    display: flex;
-    align-items: flex-start;
-    /* 上寄せ */
-    justify-content: center;
-    padding-top: 2rem;
-    /* 少し上に配置 */
+.auth-links li {
+    display: inline-block;
+    margin: 0 0.5rem;
+
 }
 
+.auth-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.auth-links a:hover {}
 
 .container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* quiz_result.php----- */
+.container-result {
     text-align: center;
 }
 
-
-/* ログインリンク */
-li {
-    list-style: none;
-}
-
-.auth-links li a {
-    color: #4a90e2;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.auth-links li a:hover {
-    text-decoration: underline;
-}
-
-h1 {
-    color: #4a90e2;
+h2 {
     text-align: center;
+    margin-bottom: 1rem;
+    color: #f08a5d;
 }
 
-.p-title {
-    margin-bottom: 30px;
-    font-size: 1.5rem;
+.question-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fefbd8;
+    text-align: center;
+    border-radius: 10px;
+
 }
 
-/* 学年ボタン */
 .grades {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
+    margin: 0.5rem 0;
+    text-align: center;
 }
 
 .grade-btn {
-    display: block;
-    width: 50%;
-    max-width: 300px;
-    margin: 0 auto;
-    text-decoration: none;
-    background-color: #4a90e2;
+    display: inline-block;
+    width: 45%;
+    margin: 0.3rem 1%;
+    padding: 0.8rem 0;
+    font-size: 1rem;
     color: #fff;
-    padding: 15px 0;
-    border-radius: 20px;
-    font-size: 1.2rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #6cace4;
+    /* 明るいブルー */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
 }
 
+.backtop {
+    width: 300px;
+}
 
 .grade-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: #4a90e2;
 }
 
-.grade-btn ruby {
+.feedback {
     font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+    color: #f08a5d;
 }
 
-.grade-btn rt {
-    font-size: 0.8rem;
-    color: #fffde7;
+.subjects {
+    margin-top: 1rem;
+    text-align: center;
 }
 
-
-/* grade.php---------------------------
--------------------------------------- */
-
-.grades-Subject {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.subjects button {
+    margin: 0.3rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #f6abb6;
+    /* 柔らかいピンク */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.subject-title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    margin-bottom: 1rem;
+.subjects button:hover {
+    background-color: #f08a5d;
 }
 
-/* quiz.php--------------------------
-------------------------------------- */
-
-.container .quiz-title {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.margin-feedback {
-    margin-bottom: 3rem;
+select {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
