@@ -30,12 +30,11 @@ class UserController {
         // //    - GETなら register_view.php を include
         if($action === 'register'){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                
                 $username = trim($_POST['username']);
                 $email = trim($_POST['email']);
                 $password = $_POST['password'];
                 $password_confirm = $_POST['password_confirm'];
-                
-                
                 $error = [];
 
                 //--------ユーザ名バリデーション
@@ -46,7 +45,7 @@ class UserController {
                     $error[] = 'ユーザ名は5文字以上、20文字以下で入力してください';
                 }elseif (!preg_match('/^[a-zA-Z0-9_-]+$/', $username)) {
                     $error[] = 'ユーザー名に使用できない文字が含まれています';
-                }else if($this->model->isUsernameExists($username)){
+                }else if ($this->model->isUsernameExists($username)){
                     $error[] = '既に使用されているユーザー名です';
                 }
 
@@ -74,13 +73,20 @@ class UserController {
                     $error[] = 'パスワードが一致しません';
                 }
 
-                if (empty($errors)) {
+                if (empty($error)) {
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                    $this->model->createUser($username, $email, $hashedPassword);
+                    $result = $this->model->createUser($username, $email, $hashedPassword);
 
-                    // 登録成功 → ログインページにリダイレクト
-                    header('Location: /../views/login_view.php');
-                    exit;
+                    if($result){
+                        // 登録成功
+                        header('Location: ../public/register_success.php');
+                        exit;
+                    }else{
+                        $error[] = 'エラーが発生し、登録できませんでした';
+                        include __DIR__ . '/../views/register_view.php';
+                        exit;
+                    }
+                                      
                 }else {
                     // echo 'error';
                     // exit;
