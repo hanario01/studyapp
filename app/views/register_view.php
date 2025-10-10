@@ -1,119 +1,180 @@
 <?php
-// register_view.php
-// エラーメッセージがある場合は $error 配列に格納されている前提
+// session_start() は不要（ビューなので）
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザー登録</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>まなびの森 - 新規登録</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* =========================== 共通スタイル =========================== */
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #6bb8ff, #b6eaff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+        header {
+            width: 100%;
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
 
-    .register-container {
-      background: white;
-      padding: 2.5rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 380px;
-      text-align: center;
-      animation: fadeIn 0.5s ease;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
 
-    h1 {
-      margin-bottom: 1.5rem;
-      font-size: 1.6rem;
-      color: #333;
-    }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 40px 50px;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.7s ease-in-out;
+        }
 
-    input {
-      width: 100%;
-      padding: 0.75rem;
-      margin: 0.5rem 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
+        /* =========================== フォーム =========================== */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #007bff;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background 0.3s;
-    }
+        label {
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #333;
+        }
 
-    button:hover {
-      background: #0056b3;
-    }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
 
-    .error-message {
-      color: red;
-      text-align: left;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
+        input:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74,144,226,0.3);
+            outline: none;
+        }
 
-    .link {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
+        button.grade-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
 
-    .link a {
-      color: #007bff;
-      text-decoration: none;
-    }
+        button.grade-btn:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
 
-    .link a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================== エラー表示 =========================== */
+        .error-box {
+            background-color: #ffe3e3;
+            border-left: 5px solid #ff6b6b;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #c0392b;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-  <div class="register-container">
-    <h1>新規登録</h1>
+<header>
+    <h1>まなびの森 - 新規登録</h1>
+</header>
 
-    <?php if (!empty($error)): ?>
-      <div class="error-message">
-        <ul>
-          <?php foreach ($error as $e): ?>
-            <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
+<main>
+    <div class="container">
 
-    <form action="?action=register" method="POST">
-      <input type="text" name="username" placeholder="ユーザー名" required>
-      <input type="email" name="email" placeholder="メールアドレス" required>
-      <input type="password" name="password" placeholder="パスワード" required>
-      <input type="password" name="password_confirm" placeholder="パスワード（確認）" required>
-      <button type="submit">登録する</button>
-    </form>
+        <!-- 🔹 エラー表示エリア -->
+        <?php if (!empty($error)): ?>
+            <div class="error-box">
+                <ul>
+                    <?php foreach ($error as $e): ?>
+                        <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-    <div class="link">
-      <p>すでにアカウントをお持ちですか？ <a href="?action=login">ログインはこちら</a></p>
+        <!-- フォーム開始 -->
+        <form method="post" action="../../public/register.php">
+            
+            <div class="form-group">
+                <label for="username">ユーザー名</label>
+                <input type="text" id="username" name="username" placeholder="例：manabi_taro" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" placeholder="例：example@mail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password" placeholder="8文字以上の英数字" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirm">パスワード確認</label>
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="もう一度入力" required>
+            </div>
+            <input type="hidden" name=action value="register">
+            <button type="submit" class="grade-btn">登録</button>
+        </form>
+        <!-- フォーム終了 -->
+
+        <a href="login_view.php">すでにアカウントを持っている場合はこちら</a>
     </div>
   </div>
 </body>

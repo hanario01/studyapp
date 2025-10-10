@@ -1,6 +1,5 @@
 <?php
 // セッション開始（エラーメッセージなどを扱う場合に必要）
-session_start();
 function h($str) { return htmlspecialchars($str, ENT_QUOTES, 'UTF-8'); }
 
 // エラーメッセージを一時的に表示する（例：ログイン失敗時など）
@@ -131,7 +130,7 @@ unset($_SESSION['error']);
     <?php endif; ?>
 
     <!-- ログインフォーム -->
-    <form action="login.php" method="post">
+    <form action="../app/controllers/login.php?action=login" method="post">
         <label for="login_input">ユーザー名またはメールアドレス</label>
         <input type="text" id="login_input" name="login_input" placeholder="例: taro または taro@example.com" required>
 
@@ -142,7 +141,7 @@ unset($_SESSION['error']);
     </form>
 
         <div class="link">
-            <p>アカウントをお持ちでない方は <a href="../app/views/register_view.php">新規登録</a></p>
+            <p>アカウントをお持ちでない方は <a href="register_view.php">新規登録</a></p>
         </div>
     </div>
 </body>
