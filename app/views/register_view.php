@@ -1,6 +1,6 @@
 <?php
 // session_start() は不要（ビューなので）
-// $error が存在する場合、Controller 側から受け取って表示する
+
 ?>
 
 <!DOCTYPE html>

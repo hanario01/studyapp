@@ -30,8 +30,6 @@ class UserController {
         // //    - POSTならフォームデータを取得
         // //    - GETなら register_view.php を include
         if($action === 'register'){
-            echo 'aaa';
-            exit;
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $username = trim($_POST['username']);
                 $email = trim($_POST['email']);
@@ -46,7 +44,7 @@ class UserController {
                 if($username === ''){
                     $error[] = 'ユーザ名を入力してください'; 
                 }elseif(mb_strlen($username) < 5 || mb_strlen($username) > 20){
-                    $error[] = '5文字以上、20文字以下で入力してください';
+                    $error[] = 'ユーザ名は5文字以上、20文字以下で入力してください';
                 }elseif (!preg_match('/^[a-zA-Z0-9_-]+$/', $username)) {
                     $error[] = 'ユーザー名に使用できない文字が含まれています';
                 }else if($this->model->isUsernameExists($username)){
@@ -68,7 +66,7 @@ class UserController {
                 if($password === ''){
                     $error[] = 'パスワードを入力してください';
                 }elseif (strlen($password) < 8 || strlen($password) > 20){
-                    $error[] = '8文字以上、20文字以下で入力してください';
+                    $error[] = 'パスワードは、8文字以上、20文字以下で入力してください';
                 }elseif(!preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)) {
                     $error[] = 'パスワードは英大文字・英小文字・数字を含めてください';
                 }
@@ -85,11 +83,15 @@ class UserController {
                     header('Location: /../views/login_view.php');
                     exit;
                 }else {
+                    // echo 'error';
+                    // exit;
                     // エラーがある場合 → フォームに戻してエラー表示
                     include __DIR__ . '/../views/register_view.php';
                     exit;
                 }
             }else {
+                // echo 'GET';
+                // exit;
                 // GETの場合  フォーム表示
                 include __DIR__ . '/../views/register_view.php';
                 exit;
