@@ -148,7 +148,7 @@
         <?php endif; ?>
 
         <!-- フォーム開始 -->
-        <form method="post" action="../../public/register.php">
+        <form method="post" action="/studyapp-1/public/register.php">
             
             <div class="form-group">
                 <label for="username">ユーザー名</label>
@@ -173,7 +173,7 @@
             <button type="submit" class="grade-btn">登録</button>
         </form>
         <!-- フォーム終了 -->
-
+                      
         <a href="login_view.php">すでにアカウントを持っている場合はこちら</a>
     </div>
   </div>

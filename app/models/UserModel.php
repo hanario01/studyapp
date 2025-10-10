@@ -16,11 +16,20 @@ class UserModel {
         3. execute() でデータベースに登録
         4. 成功すれば true、失敗すれば false を返す
         */
+        try {
         $stmt = $this->pdo->prepare("
             INSERT INTO users (username,email,password)
             VALUES(?,?,?)
         ");
-        return $stmt-> execute([$username,$email,$hashedPassword]);
+        $stmt->execute([$username,$email,$hashedPassword]);
+        return true;
+        } catch (PDOException $e) {
+        // 重複エラーならfalseを返す
+            if ($e->getCode() == 23000) {
+            return false;
+        }
+        throw $e; // その他は例外を再スロー
+        }
     }
 
     // メールアドレスからユーザー情報を取得

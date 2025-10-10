@@ -56,7 +56,7 @@
     <div class="card">
         <h1>登録が完了しました 🎉</h1>
         <p>ご登録ありがとうございます。<br>ログインページからログインしてください。</p>
-        <a href="../login.php">ログインページへ</a>
+        <a href="../app/views/login_view.php">ログインページへ</a>
     </div>
 </body>
 </html>

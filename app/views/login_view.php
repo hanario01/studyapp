@@ -130,15 +130,16 @@ unset($_SESSION['error']);
     <?php endif; ?>
 
     <!-- ログインフォーム -->
-    <form action="../app/controllers/login.php?action=login" method="post">
-        <label for="login_input">ユーザー名またはメールアドレス</label>
-        <input type="text" id="login_input" name="login_input" placeholder="例: taro または taro@example.com" required>
+   <form method="post" action="/studyapp-1/public/login.php">
+    <input type="hidden" name="action" value="login">
+    <label for="login_input">ユーザー名またはメールアドレス</label>
+    <input type="text" id="login_input" name="login_input" required>
+    
+    <label for="password">パスワード</label>
+    <input type="password" id="password" name="password" required>
 
-        <label for="password">パスワード</label>
-        <input type="password" id="password" name="password" placeholder="パスワードを入力" required>
-
-        <button type="submit" class="login-btn">ログイン</button>
-    </form>
+    <button type="submit" class="login-btn">ログイン</button>
+</form>
 
         <div class="link">
             <p>アカウントをお持ちでない方は <a href="register_view.php">新規登録</a></p>
