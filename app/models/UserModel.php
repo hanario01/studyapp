@@ -82,5 +82,37 @@ class UserModel {
         return $stmt->fetchColumn() > 0;
     }
 
+    
+    // プロフィール更新
+    public function updateUser($userId, $username, $email, $iconPath = '') {
+    // バリデーション
+        if (empty($userId) || empty($username) || empty($email)) {
+            throw new Exception('ユーザー情報が不完全です。');
+        }
+
+        // 変更内容に応じてSQLを動的に組み立てる
+        $sql = "UPDATE users SET username = :username, email = :email";
+        $params = [
+            ':username' => $username,
+            ':email'    => $email,
+            ':id'       => $userId
+        ];
+
+        // アイコンがある場合のみ更新
+        if (!empty($iconPath)) {
+            $sql .= ", icon = :icon";
+            $params[':icon'] = $iconPath;
+        }
+
+        $sql .= " WHERE id = :id";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            error_log("ユーザー情報更新エラー: " . $e->getMessage());
+            return false;
+        }
+    }
 
 }
