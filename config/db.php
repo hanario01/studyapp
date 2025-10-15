@@ -2,7 +2,6 @@
 <?php
 // 画像アップロード先のディレクトリ
 define('UPLOAD_DIR', __DIR__ . '/../public/uploads/icons/');
-
 // 画像の表示用URL
 define('UPLOAD_URL', '/studystep/studyapp-1/public/uploads/icons/');
 
