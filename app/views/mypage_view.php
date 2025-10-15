@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../common/auth.php';
-
+    require_once __DIR__ . '/../common/auth.php'; 
+    
 // ログインしていなければリダイレクト
 checkLogin();
 
@@ -50,8 +50,19 @@ body {
     flex-direction: column;
     gap: 15px;
 }
-.menu a {
-    display: block;
+.profile-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #3b82f6;
+        object-fit: cover;
+        margin: 0
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px rgba(59,130,246,0.3);
+        transition: transform 0.3s ease;
+    }
+.menu .btn-style {
+    display: inline-block;
     background: #3b82f6;
     color: white;
     text-decoration: none;
@@ -62,6 +73,20 @@ body {
 .menu a:hover {
     background: #2563eb;
 }
+.menu .btn-logout{    
+    background: #ef4444;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin:0 auto;
+    border:none;
+    transition: 0.3s;
+    
+}
+.menu .btn-logout:hover{
+    background: #ee1515ff;
+}
+
 </style>
 </head>
 <body>
@@ -69,10 +94,20 @@ body {
     <div class="fade">ようこそ、<?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?> さん！</div>
 
     <div class="menu">
-        <a href="/studyapp-1/public/profile_edit.php">プロフィール編集</a>
-        <a href="/studyapp-1/public/history.php">学習履歴・分析</a>
-        <a href="/studyapp-1/public/quiz.php">問題ページへ</a>
-        <a href="/studyapp-1/public/logout.php" style="background:#ef4444;">ログアウト</a>
+        <img id="preview"
+            src="<?= !empty($user['icon']) 
+                    ? '/studystep/studyapp-1/public/uploads/icons/' . htmlspecialchars($user['icon'], ENT_QUOTES, 'UTF-8') 
+                    : '/studystep/studyapp-1/public/uploads/icons/default.png' ?>"
+            alt="プロフィール画像"
+            class="profile-icon">
+        <a href="/studystep/studyapp-1/public/profile_edit.php" class="btn-style">プロフィール編集</a>
+        <a href="/studystep/studyapp-1/public/history.php" class="btn-style">学習履歴・分析</a>
+        <a href="/studystep/studyapp-1/public/quiz.php" class="btn-style">問題ページへ</a>
+        <form method="POST" action="http://localhost/studystep/studyapp-1/public/logout.php">
+            <input type="hidden" name="action" value="logout">
+            <button type="/studystep/studyapp-1/public/logout.php" class="btn-logout">ログアウト</button>
+        </form>
+        
     </div>
 </div>
 </body>

@@ -130,7 +130,7 @@ unset($_SESSION['error']);
     <?php endif; ?>
 
     <!-- ログインフォーム -->
-   <form method="post" action="/studyapp-1/public/login.php">
+    <form method="post" action="http://localhost/studystep/studyapp-1/public/login.php">
     <input type="hidden" name="action" value="login">
     <label for="login_input">ユーザー名またはメールアドレス</label>
     <input type="text" id="login_input" name="login_input" required>
@@ -142,7 +142,9 @@ unset($_SESSION['error']);
 </form>
 
         <div class="link">
-            <p>アカウントをお持ちでない方は <a href="register_view.php">新規登録</a></p>
+            <p>アカウントをお持ちでない方は 
+                <a href="register_view.php">新規登録</a>
+            </p>
         </div>
     </div>
 </body>

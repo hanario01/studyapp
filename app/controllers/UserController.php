@@ -13,6 +13,8 @@ class UserController {
     // リクエスト処理
     public function handleRequest() {
         $action = $_POST['action'] ?? $_GET['action'] ?? '';
+        // var_dump($action);
+        // exit;
 
         switch ($action) {
             case 'register':
@@ -73,16 +75,18 @@ class UserController {
             }
 
             if (empty($error)) {
+                //パスワードハッシュ化
                 $hashed = password_hash($password, PASSWORD_DEFAULT);
-                $result = $this->model->createUser($username, $email, $hashed);
-
-                if ($result) {
-                    header('Location: /studyapp-1/public/login.php');
-                    exit;
-                } else {
-                    $error[] = '登録に失敗しました';
-                }
+                //  セッションに保存してログイン状態にする
+                $newUser = $this->model->createUser($username, $email, $hashed);
+                session_regenerate_id(true);
+                $_SESSION['user'] = $newUser;
+                header('Location: http://localhost/studystep/studyapp-1/app/views/register_success.php');
+                exit;
+            } else {
+                $error[] = '登録に失敗しました';
             }
+            
         }
 
         require __DIR__ . '/../views/register_view.php';
@@ -107,7 +111,7 @@ class UserController {
             if ($user && password_verify($password, $user['password'])) {
                 session_regenerate_id(true);
                 $_SESSION['user'] = $user;
-                header('Location: /studyapp-1/app/views/mypage_view.php');
+                header('Location: http://localhost/studystep/studyapp-1/app/views/mypage_view.php');
                 exit;
             } else {
                 $error[] = 'ユーザー名またはパスワードが間違っています';
@@ -122,7 +126,7 @@ class UserController {
     // -----------------------
     private function logout() {
         session_destroy();
-        header('Location: /studyapp-1/public/index.php');
+        header('Location: http://localhost/studystep/studyapp-1/public/index.php');
         exit;
     }
 
@@ -131,7 +135,7 @@ class UserController {
     // -----------------------
     public function showMypage() {
         if (empty($_SESSION['user'])) {
-            header('Location: /studyapp-1/public/login.php');
+            header('Location: http://localhost/studystep/studyapp-1/public/login.php');
             exit;
         }
         $user = $_SESSION['user'];
@@ -143,7 +147,7 @@ class UserController {
     // -----------------------
     public function editProfile() {
         if (empty($_SESSION['user'])) {
-            header('Location: /studyapp-1/public/login.php');
+            header('Location: http://localhost/studystep/studyapp-1/public/login.php');
             exit;
         }
 
@@ -162,6 +166,7 @@ class UserController {
                 // アイコンアップロードは別メソッドで安全に処理
                 $iconPath = '';
                 if (!empty($_FILES['icon']['tmp_name'])) {
+                    $_SESSION['user']['icon'] = $iconPath; // ← セッションも更新
                     $iconPath = $this->uploadIcon($_FILES['icon'], $user['id']);
                 }
 
@@ -179,7 +184,7 @@ class UserController {
     // アイコンアップロード
     // -----------------------
     private function uploadIcon($file, $userId) {
-        $uploadDir = __DIR__ . '/../../public/uploads/';
+        $uploadDir = __DIR__ . '/../../public/uploads/icons/';
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
         $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -187,7 +192,7 @@ class UserController {
         $target = $uploadDir . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $target)) {
-            return '/studyapp-1/public/uploads/' . $filename;
+            return '/studystep/studyapp-1/public/uploads/icons/' . $filename;
         }
         return '';
     }
