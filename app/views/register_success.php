@@ -60,7 +60,7 @@ require_once __DIR__ . '/../common/function.php';
     <div class="card">
         <h1>登録が完了しました 🎉</h1>
         <p>ご登録ありがとうございます。<br>下のボタンからマイページへ移動して学習を始めよう！</p>
-        <a href="mypage_view.php">マイページ</a>
+        <a href="/studystep/studyapp-1/app/views/mypage_view.php">マイページ</a>
     </div>
 </body>
 </html>

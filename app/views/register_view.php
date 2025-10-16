@@ -173,7 +173,7 @@ require_once __DIR__ . '/../common/function.php';
         </form>
         <!-- フォーム終了 -->
                     
-        <a href="login_view.php">すでにアカウントを持っている場合はこちら</a>
+        <a href="/studystep/studyapp-1/app/views/login_view.php">すでにアカウントを持っている場合はこちら</a>
     </div>
 </body>
 </html>

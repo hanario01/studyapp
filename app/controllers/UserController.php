@@ -111,7 +111,7 @@ class UserController {
             if ($user && password_verify($password, $user['password'])) {
                 session_regenerate_id(true);
                 $_SESSION['user'] = $user;
-                header('Location: http://localhost/studystep/studyapp-1/app/views/mypage_view.php');
+                header('Location: /studystep/studyapp-1/app/views/mypage_view.php');
                 exit;
             } else {
                 $error[] = 'ユーザー名またはパスワードが間違っています';
