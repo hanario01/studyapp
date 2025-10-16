@@ -1,6 +1,6 @@
 <?php
     require_once __DIR__ . '/../common/auth.php'; 
-    
+    require_once __DIR__ . '/../common/function.php'; 
 // ログインしていなければリダイレクト
 checkLogin();
 
@@ -50,6 +50,13 @@ body {
     flex-direction: column;
     gap: 15px;
 }
+.icon{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:1rem;
+}
 .profile-icon {
         width: 120px;
         height: 120px;
@@ -91,15 +98,17 @@ body {
 </head>
 <body>
 <div class="mypage">
-    <div class="fade">ようこそ、<?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?> さん！</div>
+    <div class="fade">ようこそ、<?= h($user['username'], ENT_QUOTES, 'UTF-8') ?> さん！</div>
 
     <div class="menu">
+        <div class="icon">
         <img id="preview"
             src="<?= !empty($user['icon']) 
-                    ? '/studystep/studyapp-1/public/uploads/icons/' . htmlspecialchars($user['icon'], ENT_QUOTES, 'UTF-8') 
+                    ? h($user['icon'], ENT_QUOTES, 'UTF-8') 
                     : '/studystep/studyapp-1/public/uploads/icons/default.png' ?>"
             alt="プロフィール画像"
             class="profile-icon">
+        </div>
         <a href="/studystep/studyapp-1/public/profile_edit.php" class="btn-style">プロフィール編集</a>
         <a href="/studystep/studyapp-1/public/history.php" class="btn-style">学習履歴・分析</a>
         <a href="/studystep/studyapp-1/public/quiz.php" class="btn-style">問題ページへ</a>

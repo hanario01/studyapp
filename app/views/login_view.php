@@ -1,10 +1,6 @@
 <?php
-// セッション開始（エラーメッセージなどを扱う場合に必要）
-function h($str) { return htmlspecialchars($str, ENT_QUOTES, 'UTF-8'); }
+require_once __DIR__ . '/../common/function.php';
 
-// エラーメッセージを一時的に表示する（例：ログイン失敗時など）
-$error = $_SESSION['error'] ?? '';
-unset($_SESSION['error']);
 ?>
 <!DOCTYPE html>
 <html lang="ja">

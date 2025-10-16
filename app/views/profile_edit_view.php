@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../common/function.php';
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -34,6 +38,14 @@
     h2 {
         color: #333;
         margin-bottom: 25px;
+    }
+
+    .profile-icon-edit {
+        display: flex;
+        flex-direction: column; /* 縦並び */
+        align-items: center;   /* 中央寄せ */
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .profile-icon {
@@ -98,35 +110,38 @@
     <h2>プロフィール編集</h2>
 
     <?php if (!empty($message)): ?>
-        <div class="message success"><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></div>
+        <div class="message success"><?= h($message, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     <?php if (!empty($error)): ?>
-        <div class="message error"><?= htmlspecialchars(implode('<br>', $error), ENT_QUOTES, 'UTF-8') ?></div>
+        <div class="message error"><?= h(implode('<br>', $error), ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
 
     <form method="POST" enctype="multipart/form-data" action="/studystep/studyapp-1/public/profile_edit.php">
-        <!-- プロフィール画像 -->
-        <img id="preview"
-            src="<?= !empty($user['icon'])
-                    ? '/studystep/studyapp-1/public/uploads/icons/' . htmlspecialchars($user['icon'], ENT_QUOTES, 'UTF-8')
-                    : '/studystep/studyapp-1/public/uploads/icons/default.png' ?>"
-            alt="プロフィール画像"
-            class="profile-icon">
+        <div class="profile-icon-edit">
+            <!-- プロフィール画像 -->
+            <img id="preview"
+                src="<?= !empty($user['icon'])
+                        ? h($user['icon'], ENT_QUOTES, 'UTF-8')
+                        : '/studystep/studyapp-1/public/uploads/icons/default.png' ?>"
+                alt="プロフィール画像"
+                class="profile-icon">
 
-        <label for="icon" class="custom-file-label">画像を選択</label>
-        <input type="file" name="icon" id="icon" accept="image/*" onchange="previewImage(event)">
+            <label for="icon" class="custom-file-label">画像を選択</label>
+            <input type="file" name="icon" id="icon" accept="image/*" onchange="previewImage(event)">
+            </div>
 
         <!-- ユーザー名 -->
-        <input type="text" name="username" value="<?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?>" placeholder="ユーザー名" required>
+        <input type="text" name="username" value="<?= h($user['username'], ENT_QUOTES, 'UTF-8') ?>" placeholder="ユーザー名" required>
 
         <!-- メール -->
-        <input type="email" name="email" value="<?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') ?>" placeholder="メールアドレス" required>
-
+        <input type="email" name="email" value="<?= h($user['email'], ENT_QUOTES, 'UTF-8') ?>" placeholder="メールアドレス" required>
+        <!-- 既存アイコン名を保持 -->
+        <input type="hidden" name="current_icon" value="<?= h($user['icon'], ENT_QUOTES, 'UTF-8') ?>">
         <button type="submit">保存</button>
     </form>
 
     <div style="margin-top:20px;">
-        <a href="/studystep/studyapp-1/public/mypage.php" style="color:#3b82f6;text-decoration:none;">← マイページに戻る</a>
+        <a href="/studystep/studyapp-1/public/mypage.php" style="color:#3b82f6;text-decoration:none;">マイページに戻る</a>
     </div>
 </div>
 

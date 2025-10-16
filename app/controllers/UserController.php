@@ -166,8 +166,8 @@ class UserController {
                 // アイコンアップロードは別メソッドで安全に処理
                 $iconPath = '';
                 if (!empty($_FILES['icon']['tmp_name'])) {
-                    $_SESSION['user']['icon'] = $iconPath; // ← セッションも更新
                     $iconPath = $this->uploadIcon($_FILES['icon'], $user['id']);
+                    $_SESSION['user']['icon'] = $iconPath; // ← セッションも更新
                 }
 
                 $this->model->updateUser($user['id'], $username, $email, $iconPath);
@@ -176,7 +176,7 @@ class UserController {
                 $message = 'プロフィールを更新しました';
             }
         }
-
+        $user = $_SESSION['user']; // 再取得して最新をビューに渡す
         require __DIR__ . '/../views/profile_edit_view.php';
     }
 

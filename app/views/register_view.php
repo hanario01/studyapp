@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../common/function.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -140,7 +140,7 @@
             <div class="error-box">
                 <ul>
                     <?php foreach ($error as $e): ?>
-                        <li><?= htmlspecialchars($e, ENT_QUOTES, 'UTF-8') ?></li>
+                        <li><?= h($e, ENT_QUOTES, 'UTF-8') ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

@@ -1,5 +1,5 @@
 <?php
-function h($str) { return htmlspecialchars($str, ENT_QUOTES, 'UTF-8'); }
+require_once __DIR__ . '/../common/function.php';
 $score = $_SESSION['score'] ?? 0;
 session_destroy();
 ?>

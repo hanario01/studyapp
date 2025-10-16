@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../common/function.php';
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
