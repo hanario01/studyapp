@@ -15,6 +15,7 @@ function checkLogin() {
         header('Location: /studyapp-1/public/login.php');
         exit;
     }
+    return $_SESSION['user']; // ← これを追加
 }
 
 /**

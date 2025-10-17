@@ -1,10 +1,8 @@
 <?php
 session_start();
 require_once '../config/db.php';
-require_once '../app/common/function.php'; // h()関数用
 
-$user = $_SESSION['user'] ?? null;
-
+// 学年・科目のデフォルト値
 $grade = 1;
 $subjects = [
     'kanji'   => '国語',
@@ -20,28 +18,15 @@ $subjects = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>まなびの森 - トップページ</title>
     <link rel="stylesheet" href="../css/style.css">
+
 </head>
 <body>
 <header>
     <h1>まなびの森</h1>
     <nav class="user-nav">
         <ul class="auth-links">
-            <?php if ($user): ?>
-                <li style="display:flex; align-items:center;">
-                    <img src="<?= !empty($user['icon']) ? h($user['icon']) : '/studystep/studyapp-1/public/uploads/icons/default.png' ?>"
-                         alt="アイコン" style="width:40px; height:40px; border-radius:50%; margin-right:8px;">
-                    こんにちは、<?= h($user['username']) ?> さん
-                </li>
-                <li>
-                    <form method="POST" action="../public/logout.php" style="display:inline;">
-                        <input type="hidden" name="action" value="logout">
-                        <button type="submit" class="btn-logout">ログアウト</button>
-                    </form>
-                </li>
-            <?php else: ?>
-                <li><a href="../app/views/login_view.php">ログイン</a></li>
-                <li><a href="../app/views/register_view.php">新規登録</a></li>
-            <?php endif; ?>
+            <li><a href="../app/views/login_view.php">ログイン</a></li>
+            <li><a href="../app/views/register_view.php">新規登録</a></li>
         </ul>
     </nav>
 </header>
@@ -51,7 +36,6 @@ $subjects = [
         <h2>学年を選んでスタート</h2>
         <div class="grades">
             <form action="quiz.php" method="get">
-                <input type="hidden" name="start" value="new"> <!-- ← これを追加 -->
                 <label for="grade">学年:</label>
                 <select name="grade" id="grade">
                     <?php for ($i = 1; $i <= 6; $i++): ?>

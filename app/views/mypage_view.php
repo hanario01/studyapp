@@ -111,7 +111,7 @@ body {
         </div>
         <a href="/studystep/studyapp-1/public/profile_edit.php" class="btn-style">プロフィール編集</a>
         <a href="/studystep/studyapp-1/public/history.php" class="btn-style">学習履歴・分析</a>
-        <a href="/studystep/studyapp-1/public/quiz.php" class="btn-style">問題ページへ</a>
+        <a href="/studystep/studyapp-1/public/index.php?start=new" class="btn-style" >問題ページへ</a>
         <form method="POST" action="/studystep/studyapp-1/public/logout.php">
             <input type="hidden" name="action" value="logout">
             <button type="/studystep/studyapp-1/public/logout.php" class="btn-logout">ログアウト</button>
